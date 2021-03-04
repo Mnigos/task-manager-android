@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.task_manager_android.databinding.ActivityLoginBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
@@ -18,8 +19,12 @@ class LoginActivity : AppCompatActivity() {
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
 
-        CoroutineScope(Dispatchers.IO).launch {
+        val job: Job = CoroutineScope(Dispatchers.IO).launch {
             Log.d("HTTP_JSON", FetchApi().getJSONString())
         }
+
+        job.start()
+
+        if (job.isCompleted) job.cancel()
     }
 }
