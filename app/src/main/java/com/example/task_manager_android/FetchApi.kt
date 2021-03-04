@@ -9,8 +9,7 @@ import java.io.InputStream
 import java.net.URL
 import javax.net.ssl.HttpsURLConnection
 
-class FetchApi {
-    private val apiUrl: String = ""
+class FetchApi(private val apiUrl: String) {
 
     private fun getUrlBytes(urlSpec: String): ByteArray {
         val url = URL(urlSpec)

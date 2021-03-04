@@ -20,11 +20,13 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
 
         val job: Job = CoroutineScope(Dispatchers.IO).launch {
-            Log.d("HTTP_JSON", FetchApi().getJSONString())
+            Log.d("HTTP_JSON", FetchApi("").getJSONString())
         }
 
         job.start()
 
         if (job.isCompleted) job.cancel()
+
+
     }
 }
