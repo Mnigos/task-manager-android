@@ -6,4 +6,71 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
+    <EditText
+        android:id="@+id/editEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.276" />
+
+    <EditText
+        android:id="@+id/editPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.422" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="111dp"
+        android:layout_height="52dp"
+        android:text="Log In"
+        tools:layout_editor_absoluteX="150dp"
+        tools:layout_editor_absoluteY="372dp" />
+
+    <TextView
+        android:id="@+id/labelLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="E-mail"
+        android:textSize="30sp"
+        tools:layout_editor_absoluteX="164dp"
+        tools:layout_editor_absoluteY="139dp" />
+
+    <TextView
+        android:id="@+id/labelPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Password"
+        android:textSize="30sp"
+        tools:layout_editor_absoluteX="139dp"
+        tools:layout_editor_absoluteY="242dp" />
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign In"
+        tools:layout_editor_absoluteX="158dp"
+        tools:layout_editor_absoluteY="611dp" />
+
+    <TextView
+        android:id="@+id/labelRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Don't have account?"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="116dp"
+        tools:layout_editor_absoluteY="565dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
