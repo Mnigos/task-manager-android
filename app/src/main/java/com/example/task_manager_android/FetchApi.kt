@@ -1,6 +1,8 @@
 package com.example.task_manager_android
 
+import android.net.Uri
 import android.util.Log
+import org.json.JSONException
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.io.InputStream
@@ -42,5 +44,25 @@ class FetchApi {
 
     private fun getUrlString(urlSpec: String): String {
         return String(getUrlBytes(urlSpec))
+    }
+
+    fun getJSONString(): String {
+        var jsonString = "Something went wrong :/"
+
+        try {
+            val url: String = Uri.parse(apiUrl)
+                .buildUpon()
+                .appendQueryParameter("format", "json")
+                .appendQueryParameter("nojsoncallback", "1")
+                .appendQueryParameter("extras", "urls_s")
+                .build()
+                .toString()
+
+            jsonString = getUrlString(url)
+        } catch (e: JSONException) {
+            Log.e("Json Error", e.message.toString())
+        }
+
+        return jsonString
     }
 }
