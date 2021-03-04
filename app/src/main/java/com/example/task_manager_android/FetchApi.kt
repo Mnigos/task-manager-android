@@ -39,4 +39,8 @@ class FetchApi {
             connection.disconnect()
         }
     }
+
+    private fun getUrlString(urlSpec: String): String {
+        return String(getUrlBytes(urlSpec))
+    }
 }
