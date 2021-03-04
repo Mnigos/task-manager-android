@@ -1,8 +1,6 @@
 package com.example.task_manager_android
 
-import android.net.Uri
 import android.util.Log
-import org.json.JSONException
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.io.InputStream
