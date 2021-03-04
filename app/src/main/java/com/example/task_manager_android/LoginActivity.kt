@@ -17,16 +17,16 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        binding = ActivityLoginBinding.inflate(layoutInflater)
+        binding.btnLogin.setOnClickListener {
+            binding = ActivityLoginBinding.inflate(layoutInflater)
 
-        val job: Job = CoroutineScope(Dispatchers.IO).launch {
-            Log.d("HTTP_JSON", FetchApi("").getJSONString())
+            val job: Job = CoroutineScope(Dispatchers.IO).launch {
+                Log.d("HTTP_JSON", FetchApi("").getJSONString())
+            }
+
+            job.start()
+
+            if (job.isCompleted) job.cancel()
         }
-
-        job.start()
-
-        if (job.isCompleted) job.cancel()
-
-
     }
 }
