@@ -50,7 +50,19 @@ class FetchApi {
         var jsonString = "Something went wrong :/"
 
         try {
-            val url: String = Uri.parse(apiUrl)
+            val uri: String = buildUri(apiUrl)
+            jsonString = getUrlString(uri)
+        } catch (ex: JSONException) {
+            Log.e("Json Error", ex.message.toString())
+        }
+
+        return jsonString
+    }
+
+    @Throws(JSONException::class)
+    private fun buildUri(url: String): String {
+        try {
+            return Uri.parse(url)
                 .buildUpon()
                 .appendQueryParameter("format", "json")
                 .appendQueryParameter("nojsoncallback", "1")
@@ -58,11 +70,8 @@ class FetchApi {
                 .build()
                 .toString()
 
-            jsonString = getUrlString(url)
-        } catch (e: JSONException) {
-            Log.e("Json Error", e.message.toString())
+        } catch (ex: JSONException) {
+            throw ex;
         }
-
-        return jsonString
     }
 }
