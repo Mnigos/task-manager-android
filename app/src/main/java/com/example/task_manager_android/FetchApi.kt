@@ -17,33 +17,46 @@ class FetchApi {
         val connection: HttpsURLConnection = url.openConnection() as HttpsURLConnection
 
         try {
-            val out = ByteArrayOutputStream()
-            val input: InputStream = connection.inputStream
-
-            if (connection.responseCode != HttpsURLConnection.HTTP_OK)
-                throw IOException(connection.responseMessage)
-
-            var bytesRead: Int
-            val buffer = ByteArray(1024)
-
-            do {
-                bytesRead = input.read(buffer)
-
-                out.write(buffer, 0, bytesRead)
-            } while (input.read(buffer) > 0)
-            out.close()
-
-            return out.toByteArray()
-        } catch (e: IOException) {
-            Log.e("Http connection error", e.message.toString())
+            return getHttpsConnectionBytes(connection)
+        } catch (ex: IOException) {
+            Log.e("Http connection error", ex.message.toString())
             return ByteArray(0)
         } finally {
             connection.disconnect()
         }
     }
 
-    private fun getUrlString(urlSpec: String): String {
-        return String(getUrlBytes(urlSpec))
+    @Throws(IOException::class)
+    private fun getHttpsConnectionBytes(connection: HttpsURLConnection): ByteArray {
+        try {
+            val input: InputStream = connection.inputStream
+            if (connection.responseCode != HttpsURLConnection.HTTP_OK)
+                throw IOException(connection.responseMessage)
+            return getOutputStreamByteArray(input)
+        } catch (ex: IOException) {
+            throw ex
+        }
+    }
+
+    @Throws(IOException::class)
+    private fun getOutputStreamByteArray(input: InputStream): ByteArray {
+        val out = ByteArrayOutputStream()
+        var bytesRead: Int
+        val buffer = ByteArray(1024)
+        try {
+            do {
+                bytesRead = input.read(buffer)
+                out.write(buffer, 0, bytesRead)
+            } while (input.read(buffer) > 0)
+            out.close()
+            return out.toByteArray()
+        } catch (ex: IOException) {
+            throw ex
+        }
+    }
+
+    private fun getUrlString(uriSpec: String): String {
+        return String(getUrlBytes(uriSpec))
     }
 
     fun getJSONString(): String {
@@ -69,7 +82,6 @@ class FetchApi {
                 .appendQueryParameter("extras", "urls_s")
                 .build()
                 .toString()
-
         } catch (ex: JSONException) {
             throw ex;
         }
