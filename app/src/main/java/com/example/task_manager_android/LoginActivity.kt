@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.task_manager_android.databinding.ActivityLoginBinding
+import com.google.gson.GsonBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -17,17 +18,20 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
 
         binding.btnLogin.setOnClickListener {
-            binding = ActivityLoginBinding.inflate(layoutInflater)
 
-            val job: Job = CoroutineScope(Dispatchers.IO).launch {
-                Log.d("HTTP_JSON", FetchApi("").getJSONString())
-            }
+            if (binding.editEmail.text.toString() == "" || binding.editPassword.text.toString() == "")
+                return@setOnClickListener
 
-            job.start()
+            val response = AuthFetch("/auth/login").login(
+                binding.editEmail.text.toString(),
+                binding.editPassword.text.toString()
+            )
 
-            if (job.isCompleted) job.cancel()
+            val gson = GsonBuilder().create()
+            val token = gson.fromJson(response, LoginResponse::class.java)
         }
 
         binding.btnRegister.setOnClickListener {
@@ -36,3 +40,5 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 }
+
+class LoginResponse(val token: String)
