@@ -2,14 +2,9 @@ package com.example.task_manager_android
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.task_manager_android.databinding.ActivityLoginBinding
 import com.google.gson.GsonBuilder
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
 
@@ -22,7 +17,9 @@ class LoginActivity : AppCompatActivity() {
 
         binding.btnLogin.setOnClickListener {
 
-            if (binding.editEmail.text.toString() == "" || binding.editPassword.text.toString() == "")
+            if (binding.editEmail.text.toString() == "" ||
+                binding.editPassword.text.toString() == ""
+            )
                 return@setOnClickListener
 
             val response = AuthFetch("/auth/login").login(
