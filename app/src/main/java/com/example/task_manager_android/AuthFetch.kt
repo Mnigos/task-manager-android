@@ -9,6 +9,7 @@ class AuthFetch(private val path: String) {
     private val url = "http://localhost:3000"
     private val request = Request.Builder().url(url + path).build()
 
+    @Throws(IOException::class)
     fun login(name: String, pass: String): String {
         val body = """{
             "name": $name,
