@@ -21,5 +21,10 @@ class RegisterActivity : AppCompatActivity() {
                 binding.editPasswordConfirmation.text.toString() == ""
             ) return@setOnClickListener
         }
+
+        binding.btnLogin.setOnClickListener {
+            val loginActivity = Intent(applicationContext, LoginActivity::class.java)
+            startActivity(loginActivity)
+        }
     }
 }
