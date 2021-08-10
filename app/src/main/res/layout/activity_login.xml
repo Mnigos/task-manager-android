@@ -12,7 +12,7 @@
         android:layout_height="50dp"
         android:backgroundTint="#2980B9"
         android:fontFamily="@font/roboto_regular"
-        android:text="@string/sign_in"
+        android:text="SIGN UP"
         android:textColor="#FFFFFF"
         android:typeface="normal"
         android:visibility="visible"
