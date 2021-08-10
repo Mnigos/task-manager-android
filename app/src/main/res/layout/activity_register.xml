@@ -125,7 +125,7 @@
         app:layout_constraintVertical_bias="0.562" />
 
     <Button
-        android:id="@+id/btnRegister"
+        android:id="@+id/btnLogin"
         android:layout_width="97dp"
         android:layout_height="50dp"
         android:backgroundTint="#2980B9"
@@ -142,7 +142,7 @@
         app:layout_constraintVertical_bias="0.942" />
 
     <Button
-        android:id="@+id/btnLogin"
+        android:id="@+id/btnRegister"
         android:layout_width="97dp"
         android:layout_height="50dp"
         android:backgroundTint="#2980B9"
